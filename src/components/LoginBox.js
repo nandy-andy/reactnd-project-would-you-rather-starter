@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setAuthedUser } from '../actions/authedUser';
+import { handleInitialAfterLoggedInData } from '../actions/shared';
 
 class LoginBox extends Component {
     state = {
@@ -9,7 +9,7 @@ class LoginBox extends Component {
 
     logIn = (event) => {
         event.preventDefault();
-        this.props.dispatch(setAuthedUser(this.state.user));
+        this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
     };
 
     handleChange = (user) => {
