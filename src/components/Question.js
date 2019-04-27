@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import { handleQuestionAnswer } from '../actions/questions';
+
 class Question extends Component {
     getOptionId = (id, option) => {
         return id + '-' + option;
@@ -12,6 +14,19 @@ class Question extends Component {
         }
 
         return 'unvoted';
+    };
+
+    onVote = (event, id, option) => {
+        console.log(event.target.value, id, option);
+
+        const { dispatch, authedUser } = this.props;
+
+        dispatch(handleQuestionAnswer({
+            authedUser,
+            qid: id,
+            answer: option,
+            hasVoted: true
+        }));
     };
 
     render() {
@@ -44,8 +59,8 @@ class Question extends Component {
                     )}
                     {canVote && (
                         <ul>
-                            <li><input type='radio' id={this.getOptionId(id, 1)} name={id} /><label for={this.getOptionId(id, 1)}>{optionOne.text}</label></li>
-                            <li><input type='radio' id={this.getOptionId(id, 2)} name={id} /><label for={this.getOptionId(id, 2)}>{optionTwo.text}</label></li>
+                            <li><input type='radio' id={this.getOptionId(id, 1)} name={id} onClick={(event) => this.onVote(event, id, 'optionOne')} /><label htmlFor={this.getOptionId(id, 1)}>{optionOne.text}</label></li>
+                            <li><input type='radio' id={this.getOptionId(id, 2)} name={id} onClick={(event) => this.onVote(event, id, 'optionTwo')} /><label htmlFor={this.getOptionId(id, 2)}>{optionTwo.text}</label></li>
                         </ul>
                     )}
                     <img alt={author} src={avatarUrl} />
