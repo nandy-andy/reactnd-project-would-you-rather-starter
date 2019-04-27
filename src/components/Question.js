@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom';
 
-import { handleQuestionAnswer } from '../actions/questions';
+import { handleQuestionAnswer } from '../actions/shared';
 
 class Question extends Component {
     getOptionId = (id, option) => {
@@ -29,7 +29,7 @@ class Question extends Component {
     };
 
     render() {
-        const {authedUser, question, users} = this.props;
+        const {authedUser, question, users, isHomepage} = this.props;
 
         if (question === null) {
             return (
@@ -44,8 +44,20 @@ class Question extends Component {
         return (
             <li>
                 <div>
+                    <img alt={author} src={avatarUrl} />
                     <p>Would you rather...</p>
-                    {!canVote && (
+                    {isHomepage && (
+                        <ul>
+                            <li className={this.getVoteClass(optionOne.votes, authedUser)}>
+                                ...{optionOne.text}?
+                            </li>
+                            <li className={this.getVoteClass(optionTwo.votes, authedUser)}>
+                                ...{optionTwo.text}?
+                            </li>
+                            <p><NavLink to={`/question/${id}`}>Open the poll</NavLink></p>
+                        </ul>
+                    )}
+                    {!isHomepage && !canVote && (
                         <ul>
                             <li className={this.getVoteClass(optionOne.votes, authedUser)}>
                                 {optionOne.text} {(optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionOne.votes.length || 0})
@@ -55,14 +67,12 @@ class Question extends Component {
                             </li>
                         </ul>
                     )}
-                    {canVote && (
+                    {!isHomepage && canVote && (
                         <ul>
                             <li><input type='radio' id={this.getOptionId(id, 1)} name={id} onClick={(event) => this.onVote(event, id, 'optionOne')} /><label htmlFor={this.getOptionId(id, 1)}>{optionOne.text}</label></li>
                             <li><input type='radio' id={this.getOptionId(id, 2)} name={id} onClick={(event) => this.onVote(event, id, 'optionTwo')} /><label htmlFor={this.getOptionId(id, 2)}>{optionTwo.text}</label></li>
                         </ul>
                     )}
-                    <img alt={author} src={avatarUrl} />
-                    <p><NavLink to={`/question/${id}`}>Open the poll</NavLink></p>
                 </div>
             </li>
         );
@@ -75,7 +85,8 @@ function mapStateToProps( { authedUser, users, questions }, { id, match } ) {
     return {
         authedUser,
         question,
-        users
+        users,
+        isHomepage: !match.params.id
     };
 }
 

@@ -1,7 +1,7 @@
-import { _getUsers, _getQuestions } from '../utils/_DATA';
+import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
 
-import { receiveUsers } from './users';
-import { receiveQuestions } from './questions';
+import { receiveUsers, saveUserAnswer } from './users';
+import { receiveQuestions, saveQuestionAnswer } from './questions';
 import { setAuthedUser} from './authedUser';
 
 export function handleInitialData () {
@@ -15,17 +15,27 @@ export function handleInitialData () {
 }
 
 export function handleInitialAfterLoggedInData (user) {
-    console.log('user: ', user);
-
     return (dispatch) => {
         return Promise.all([_getUsers(), _getQuestions()])
             .then( (values) => {
-                console.log('users: ', values[0]);
-                console.log('questions: ', values[1]);
-
                 dispatch(receiveUsers(values[0]));
                 dispatch(receiveQuestions(values[1]));
                 dispatch(setAuthedUser(user));
             })
     };
+}
+
+export function handleQuestionAnswer(info) {
+    return (dispatch) => {
+        dispatch(saveQuestionAnswer(info));
+        dispatch(saveUserAnswer(info));
+
+        return _saveQuestionAnswer(info)
+            .catch((e) => {
+                console.warn('Error in handleQuestionAnswer: ' + e);
+                dispatch(saveQuestionAnswer(info));
+                dispatch(saveUserAnswer(info));
+                alert('There was an error saving the answer. Try again.');
+            })
+    }
 }
