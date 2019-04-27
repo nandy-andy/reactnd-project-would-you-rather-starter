@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom'
 
 import { handleQuestionAnswer } from '../actions/questions';
 
@@ -17,8 +18,6 @@ class Question extends Component {
     };
 
     onVote = (event, id, option) => {
-        console.log(event.target.value, id, option);
-
         const { dispatch, authedUser } = this.props;
 
         dispatch(handleQuestionAnswer({
@@ -30,17 +29,16 @@ class Question extends Component {
     };
 
     render() {
-        const {id, authedUser} = this.props;
-        const filteredQuestions = this.props.questions.filter(question => question.id === id);
+        const {authedUser, question, users} = this.props;
 
-        if (filteredQuestions.length === 0) {
+        if (question === null) {
             return (
-                <li>Incorrect question id</li>
+                <li>The question you're looking for does not exist. Sorry.</li>
             );
         }
 
-        const {author, optionOne, optionTwo} = filteredQuestions[0];
-        const avatarUrl = this.props.users[author].avatarURL;
+        const {id, author, optionOne, optionTwo} = question;
+        const avatarUrl = users[author].avatarURL;
         const canVote = !optionOne.votes.includes(authedUser) && !optionTwo.votes.includes(authedUser);
 
         return (
@@ -64,19 +62,21 @@ class Question extends Component {
                         </ul>
                     )}
                     <img alt={author} src={avatarUrl} />
-                    <p>{id}</p>
+                    <p><NavLink to={`/question/${id}`}>Open the poll</NavLink></p>
                 </div>
             </li>
         );
     }
 }
 
-function mapStateToProps( { authedUser, users, questions } ) {
+function mapStateToProps( { authedUser, users, questions }, { id, match } ) {
+    const question = questions[id] || questions[match.params.id] || null;
+
     return {
         authedUser,
-        questions: Object.values(questions),
+        question,
         users
     };
 }
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));
