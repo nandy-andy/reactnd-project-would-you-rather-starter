@@ -1,8 +1,8 @@
-import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
+import {_getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion} from '../utils/_DATA';
 
-import { receiveUsers, saveUserAnswer } from './users';
-import { receiveQuestions, saveQuestionAnswer } from './questions';
-import { setAuthedUser} from './authedUser';
+import { receiveUsers, saveUserQuestion, saveUserAnswer } from './users';
+import { receiveQuestions, saveQuestion, saveQuestionAnswer } from './questions';
+import { setAuthedUser } from './authedUser';
 
 export function handleInitialData () {
     return (dispatch) => {
@@ -23,6 +23,20 @@ export function handleInitialAfterLoggedInData (user) {
                 dispatch(setAuthedUser(user));
             })
     };
+}
+
+export function handleSaveQuestion(question) {
+    return (dispatch) => {
+        return _saveQuestion(question)
+            .then((question) => {
+                dispatch(saveQuestion(question));
+                dispatch(saveUserQuestion(question));
+            })
+            .catch((e) => {
+                console.warn('Error in handleSaveQuestion: ' + e);
+                alert('There was an error saving the question. Try again.');
+            })
+    }
 }
 
 export function handleQuestionAnswer(info) {
