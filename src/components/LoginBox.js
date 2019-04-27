@@ -9,7 +9,10 @@ class LoginBox extends Component {
 
     logIn = (event) => {
         event.preventDefault();
-        this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
+
+        if (this.state.user !== null) {
+            this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
+        }
     };
 
     handleChange = (user) => {
@@ -22,6 +25,7 @@ class LoginBox extends Component {
         return (
             <form id='login'>
                 <select value={this.state.value} onChange={(event) => this.handleChange(event.target.value)}>
+                <option>-- select a user to log-in --</option>
                 {this.props.users.map((user) => (
                     <option key={user.id} value={user.id}>{user.name}</option>
                 ))}
