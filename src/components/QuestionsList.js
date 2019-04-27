@@ -9,15 +9,15 @@ class QuestionsList extends Component {
 
         return (
             <div>
+                <h3>Unanswered</h3>
+                <ul>
+                    {unansweredQuestions.map((question) => (
+                        <Question key={question.id} id={question.id} />
+                    ))}
+                </ul>
                 <h3>Answered</h3>
                 <ul>
                 {answeredQuestions.map((question) => (
-                    <Question key={question.id} id={question.id} />
-                ))}
-                </ul>
-                <h3>Unanswered</h3>
-                <ul>
-                {unansweredQuestions.map((question) => (
                     <Question key={question.id} id={question.id} />
                 ))}
                 </ul>
