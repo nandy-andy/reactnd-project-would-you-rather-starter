@@ -31,7 +31,21 @@ let users = {
       "6ni6ok3ym7mf1p33lnez": 'optionTwo'
     },
     questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
-  }
+  },
+  nandy: {
+      id: 'nandy',
+      name: 'Andrzej Łukaszewski',
+      avatarURL: '/avatars/160-nandy.jpeg',
+      answers: {
+          "6ni6ok3ym7mf1p33lnez": "optionOne",
+          "8xf0y6ziyjabvozdd253nd": "optionOne",
+          "am8ehyc8byjqgar0jgpub9": "optionTwo",
+          "loxhs1bqm25b708cmbf3g": "optionTwo",
+          "vthrdm985a262al8qx3do": "optionTwo",
+          "xj352vofupe1dqz9emx13r": "optionOne",
+      },
+      questions: [],
+  },
 }
 
 let questions = {
