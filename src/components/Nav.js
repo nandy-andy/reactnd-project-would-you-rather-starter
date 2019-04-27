@@ -22,11 +22,17 @@ class Nav extends Component {
                     <NavLink to='/new' activeClassName='active'>New Question</NavLink>
                 </li>
                 <li onClick={(event) => this.logOut(event)}>
-                    <NavLink to='/' activeClassName='active'>Logout</NavLink>
+                    <NavLink to='/' activeClassName='active'>Logout ({this.props.authedUser})</NavLink>
                 </li>
             </ul>
         );
     }
 }
 
-export default withRouter(connect()(Nav));
+function mapStateToProps( { authedUser } ) {
+    return {
+        authedUser
+    };
+}
+
+export default withRouter(connect(mapStateToProps)(Nav));
