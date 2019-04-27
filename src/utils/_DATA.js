@@ -35,7 +35,7 @@ let users = {
   nandy: {
       id: 'nandy',
       name: 'Andrzej Łukaszewski',
-      avatarURL: '/avatars/160-nandy.jpeg',
+      avatarURL: '/avatars/160-nandy.png',
       answers: {
           "6ni6ok3ym7mf1p33lnez": "optionOne",
           "8xf0y6ziyjabvozdd253nd": "optionOne",
