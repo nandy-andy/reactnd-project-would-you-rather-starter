@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
+import { NavLink, withRouter } from 'react-router-dom'
 
 class Nav extends Component {
     logOut = (event) => {
-        event.preventDefault();
         console.log('See you!');
         this.props.dispatch(setAuthedUser(null));
     };
@@ -12,12 +12,21 @@ class Nav extends Component {
     render() {
         return (
             <ul>
-                <li>Home</li>
-                <li>Leaderboard</li>
-                <li onClick={(event) => this.logOut(event)}>Log-out</li>
+                <li>
+                    <NavLink to='/' exact activeClassName='active'>Home</NavLink>
+                </li>
+                <li>
+                    <NavLink to='/leaderboard' activeClassName='active'>Leaderboard</NavLink>
+                </li>
+                <li>
+                    <NavLink to='/new' activeClassName='active'>New Question</NavLink>
+                </li>
+                <li onClick={(event) => this.logOut(event)}>
+                    <NavLink to='/' activeClassName='active'>Logout</NavLink>
+                </li>
             </ul>
         );
     }
 }
 
-export default connect()(Nav);
+export default withRouter(connect()(Nav));

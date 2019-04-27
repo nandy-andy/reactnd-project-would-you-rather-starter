@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialAfterLoggedInData } from '../actions/shared';
+import { withRouter } from 'react-router-dom'
 
 class LoginBox extends Component {
     state = {
@@ -12,6 +13,7 @@ class LoginBox extends Component {
 
         if (this.state.user !== null) {
             this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
+            this.props.history.push('/');
         }
     };
 
@@ -42,4 +44,4 @@ function mapStateToProps( { users } ) {
     };
 }
 
-export default connect(mapStateToProps)(LoginBox);
+export default withRouter(connect(mapStateToProps)(LoginBox));
