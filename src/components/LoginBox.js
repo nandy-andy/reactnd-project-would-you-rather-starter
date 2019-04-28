@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { handleInitialAfterLoggedInData } from '../actions/shared';
 import { withRouter } from 'react-router-dom'
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 class LoginBox extends Component {
     state = {
         user: null
@@ -25,15 +28,17 @@ class LoginBox extends Component {
 
     render() {
         return (
-            <form id='login'>
-                <select value={this.state.value} onChange={(event) => this.handleChange(event.target.value)}>
-                <option>-- select a user to log-in --</option>
-                {this.props.users.map((user) => (
-                    <option key={user.id} value={user.id}>{user.name}</option>
-                ))}
-                </select>
-                <button onClick={(event) => this.logIn(event)}>Log-in</button>
-            </form>
+            <Form>
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Control as="select" value={this.state.value} onChange={(event) => this.handleChange(event.target.value)}>
+                            <option>-- select a user to log-in --</option>
+                            {this.props.users.map((user) => (
+                                <option key={user.id} value={user.id}>{user.name}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                <Button variant="primary" onClick={(event) => this.logIn(event)}>Login</Button>
+            </Form>
         );
     }
 }

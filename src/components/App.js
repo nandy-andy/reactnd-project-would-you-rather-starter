@@ -23,8 +23,8 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    Would you rather? by nAndy
+                        <img src={logo} className="App-logo" alt="logo" />
+                        Would you rather? by nAndy
                     </header>
                     <main>
                         {this.props.authedUser === null
