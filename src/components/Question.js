@@ -76,10 +76,10 @@ class Question extends Component {
                         {!isHomepage && !canVote && (
                             <ul>
                                 <li className={this.getVoteClass(optionOne.votes, authedUser)}>
-                                    {optionOne.text} {(optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionOne.votes.length || 0})
+                                    {optionOne.text}? {(optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionOne.votes.length || 0})
                                 </li>
                                 <li className={this.getVoteClass(optionTwo.votes, authedUser)}>
-                                    {optionTwo.text} {(optionTwo.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionTwo.votes.length || 0})
+                                    {optionTwo.text}? {(optionTwo.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionTwo.votes.length || 0})
                                 </li>
                             </ul>
                         )}
