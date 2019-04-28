@@ -19,7 +19,7 @@ class QuestionsList extends Component {
                             All questions answered! Bravo!
                         </Alert>
                     )}
-                    <ul>
+                    <ul className='questions'>
                         {unansweredQuestions.map((question) => (
                             <Question key={question.id} id={question.id} />
                         ))}
@@ -31,7 +31,7 @@ class QuestionsList extends Component {
                             You haven't answered any quesiton, yet!
                         </Alert>
                     )}
-                    <ul>
+                    <ul className='questions'>
                         {answeredQuestions.map((question) => (
                             <Question key={question.id} id={question.id} />
                         ))}
