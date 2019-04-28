@@ -54,7 +54,7 @@ class Question extends Component {
                             <li className={this.getVoteClass(optionTwo.votes, authedUser)}>
                                 ...{optionTwo.text}?
                             </li>
-                            <p><NavLink to={`/question/${id}`}>Open the poll</NavLink></p>
+                            <p><NavLink to={`/questions/${id}`}>Open the poll</NavLink></p>
                         </ul>
                     )}
                     {!isHomepage && !canVote && (

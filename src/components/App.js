@@ -31,7 +31,7 @@ class App extends Component {
                             ? <Route path='/' exact component={LoginBox} />
                             : <div>
                                 <Route path='/' exact component={HomePage} />
-                                <Route path='/question/:id' component={QuestionPage} />
+                                <Route path='/questions/:id' component={QuestionPage} />
                                 <Route path='/leaderboard' component={LeaderboardPage} />
                                 <Route path='/new' component={NewQuestionPage} />
                               </div>}
