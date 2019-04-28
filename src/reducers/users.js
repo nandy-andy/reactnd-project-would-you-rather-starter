@@ -12,10 +12,7 @@ export default function users (state = {}, action) {
                 ...state,
                 [action.question.author]: {
                     ...state[action.question.author],
-                    questions: {
-                        ...state[action.question.author].questions,
-                        questions: state[action.question.author].questions.concat([action.question.id])
-                    }
+                    questions: state[action.question.author].questions.concat([action.question.id])
                 }
             };
         case SAVE_USER_ANSWER:
