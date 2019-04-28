@@ -19,7 +19,7 @@ class Nav extends Component {
                     <NavLink to='/leaderboard' activeClassName='active'>Leaderboard</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/new' activeClassName='active'>New Question</NavLink>
+                    <NavLink to='/add' activeClassName='active'>New Question</NavLink>
                 </li>
                 <li onClick={(event) => this.logOut(event)}>
                     <NavLink to='/' activeClassName='active'>Logout ({this.props.authedUser})</NavLink>
