@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 import Navigation from './Navigation';
 import { handleSaveQuestion } from '../actions/shared';
 
@@ -41,11 +44,21 @@ class NewQuestionPage extends Component {
             <div>
                 <Navigation />
                 <p>Would you rather...</p>
-                <form onSubmit={(event) => this.onSubmit(event)} >
-                    <p>...<input type='text' value={this.state.optionOne} onChange={(event) => this.onChangeOptionOne(event)} />?</p>
-                    <p>...<input type='text' value={this.state.optionTwo} onChange={(event) => this.onChangeOptionTwo(event)} />?</p>
-                    <p><input type='submit' value='Save' /></p>
-                </form>
+                <Form onSubmit={(event) => this.onSubmit(event)}>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter first option"
+                        value={this.state.optionOne}
+                        onChange={(event) => this.onChangeOptionOne(event)}
+                    />
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter second option"
+                        value={this.state.optionTwo}
+                        onChange={(event) => this.onChangeOptionTwo(event)}
+                    />
+                    <Button variant="primary" type="submit">Save</Button>
+                </Form>
             </div>
         );
     }
