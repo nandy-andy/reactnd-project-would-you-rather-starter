@@ -60,3 +60,7 @@ main {
 .options ul {
   margin: 0 0 1em 0;
 }
+
+label {
+  margin: 0 0 0 0.5em;
+}

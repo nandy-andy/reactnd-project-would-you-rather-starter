@@ -19,11 +19,11 @@ class QuestionsList extends Component {
                             All questions answered! Bravo!
                         </Alert>
                     )}
-                    <ul className='questions'>
+                    <div className='questions'>
                         {unansweredQuestions.map((question) => (
                             <Question key={question.id} id={question.id} />
                         ))}
-                    </ul>
+                    </div>
                 </Tab>
                 <Tab eventKey="answered" title="Answered">
                     {answeredQuestions.length === 0 && (
@@ -31,11 +31,11 @@ class QuestionsList extends Component {
                             You haven't answered any quesiton, yet!
                         </Alert>
                     )}
-                    <ul className='questions'>
+                    <div className='questions'>
                         {answeredQuestions.map((question) => (
                             <Question key={question.id} id={question.id} />
                         ))}
-                    </ul>
+                    </div>
                 </Tab>
             </Tabs>
         );
