@@ -48,3 +48,15 @@ main {
   list-style: none;
   padding: 0;
 }
+
+.container {
+  margin-bottom: 1em;
+}
+
+.question p {
+  margin: 0;
+}
+
+.options ul {
+  margin: 0 0 1em 0;
+}
