@@ -39,11 +39,16 @@ class Question extends Component {
 
         const {id, author, optionOne, optionTwo} = question;
         const avatarUrl = users[author].avatarURL;
-        const canVote = !optionOne.votes.includes(authedUser) && !optionTwo.votes.includes(authedUser);
+        const canVote = authedUser !== null
+            && !optionOne.votes.includes(authedUser)
+            && !optionTwo.votes.includes(authedUser);
 
         return (
             <li>
                 <div>
+                    {authedUser === null && (
+                        <p className='please-login'>In order to answer the question please login.</p>
+                    )}
                     <img alt={author} src={avatarUrl} />
                     <p>Would you rather...</p>
                     {isHomepage && (

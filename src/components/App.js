@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -28,13 +28,16 @@ class App extends Component {
                     </header>
                     <main>
                         {this.props.authedUser === null
-                            ? <Route path='/' exact component={LoginBox} />
-                            : <div>
+                            ? <Fragment>
+                                <Route path='/' exact component={LoginBox} />
+                                <Route path='/questions/:id' component={QuestionPage} />
+                              </Fragment>
+                            : <Fragment>
                                 <Route path='/' exact component={HomePage} />
                                 <Route path='/questions/:id' component={QuestionPage} />
                                 <Route path='/leaderboard' component={LeaderboardPage} />
                                 <Route path='/new' component={NewQuestionPage} />
-                              </div>}
+                              </Fragment>}
                     </main>
                 </div>
             </Router>
