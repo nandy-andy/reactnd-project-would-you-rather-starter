@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import Alert from 'react-bootstrap/Alert';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+
 import Question from './Question';
 
 class QuestionsList extends Component {
@@ -8,20 +12,32 @@ class QuestionsList extends Component {
         const { answeredQuestions, unansweredQuestions } = this.props;
 
         return (
-            <div>
-                <h3>Unanswered</h3>
-                <ul>
-                    {unansweredQuestions.map((question) => (
-                        <Question key={question.id} id={question.id} />
-                    ))}
-                </ul>
-                <h3>Answered</h3>
-                <ul>
-                {answeredQuestions.map((question) => (
-                    <Question key={question.id} id={question.id} />
-                ))}
-                </ul>
-            </div>
+            <Tabs defaultActiveKey="unanswered" transition={false} id="noanim-tab-example">
+                <Tab eventKey="unanswered" title="Unanswered">
+                    {unansweredQuestions.length === 0 && (
+                        <Alert variant='info'>
+                            All questions answered! Bravo!
+                        </Alert>
+                    )}
+                    <ul>
+                        {unansweredQuestions.map((question) => (
+                            <Question key={question.id} id={question.id} />
+                        ))}
+                    </ul>
+                </Tab>
+                <Tab eventKey="answered" title="Answered">
+                    {answeredQuestions.length === 0 && (
+                        <Alert variant='info'>
+                            You haven't answered any quesiton, yet!
+                        </Alert>
+                    )}
+                    <ul>
+                        {answeredQuestions.map((question) => (
+                            <Question key={question.id} id={question.id} />
+                        ))}
+                    </ul>
+                </Tab>
+            </Tabs>
         );
     }
 }

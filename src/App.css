@@ -35,3 +35,11 @@
 .voted {
   font-weight: bold;
 }
+
+main {
+  margin: 0.2em;
+}
+
+.nav {
+  margin: 0.5em 0;
+}
