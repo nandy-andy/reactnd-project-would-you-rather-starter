@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
-import Nav from './Nav';
+import Navigation from './Navigation';
 import { handleSaveQuestion } from '../actions/shared';
 
 class NewQuestionPage extends Component {
@@ -39,7 +39,7 @@ class NewQuestionPage extends Component {
     render() {
         return (
             <div>
-                <Nav />
+                <Navigation />
                 <p>Would you rather...</p>
                 <form onSubmit={(event) => this.onSubmit(event)} >
                     <p>...<input type='text' value={this.state.optionOne} onChange={(event) => this.onChangeOptionOne(event)} />?</p>

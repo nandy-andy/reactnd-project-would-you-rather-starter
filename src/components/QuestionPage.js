@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from './Nav';
+import Navigation from './Navigation';
 import Question from './Question';
 import { withRouter } from "react-router-dom";
 import { handleInitialAfterLoggedInData } from "../actions/shared";
@@ -18,7 +18,7 @@ class QuestionPage extends Component {
 
         return (
             <div>
-                { authedUser !== null && <Nav /> }
+                { authedUser !== null && <Navigation /> }
                 <Question />
             </div>
         );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from './Nav';
+import Navigation from './Navigation';
 
 class LeaderboardPage extends Component {
     render() {
@@ -9,7 +9,7 @@ class LeaderboardPage extends Component {
 
         return (
             <div>
-                <Nav />
+                <Navigation />
                 <ol>
                     {users.map( (user) => (
                         <li key={user.id}>
