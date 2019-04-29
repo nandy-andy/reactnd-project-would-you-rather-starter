@@ -64,3 +64,11 @@ main {
 label {
   margin: 0 0 0 0.5em;
 }
+
+.leaderboard .row {
+  padding: 1em;
+}
+
+.leaderboard .row.current {
+  background-color: cornsilk;
+}

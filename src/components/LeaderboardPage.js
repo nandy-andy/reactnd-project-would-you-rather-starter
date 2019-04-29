@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 import Navigation from './Navigation';
 
 class LeaderboardPage extends Component {
     render() {
-        const { users } = this.props;
+        const { users, authedUser } = this.props;
 
         return (
             <div>
                 <Navigation />
-                <ol>
+                <Container as='ol' className='leaderboard'>
                     {users.map( (user) => (
-                        <li key={user.id}>
-                            <ul>
-                                <li><img alt={user.name} src={user.avatarURL} /></li>
-                                <li>{user.name}</li>
-                                <li>Number of questions: {user.questions.length}</li>
-                                <li>Number of answers: {Object.keys(user.answers).length}</li>
-                            </ul>
-                        </li>
+                        <Row as='li' key={user.id} className={authedUser === user.id ? 'current' : ''}>
+                            <Col sm='auto'>
+                                <img alt={user.name} src={user.avatarURL} />
+                            </Col>
+                            <Col sm='auto' className='question'>
+                                <p>{user.name}</p>
+                                <p>Number of questions: {user.questions.length}</p>
+                                <p>Number of answers: {Object.keys(user.answers).length}</p>
+                            </Col>
+                        </Row>
                     ))}
-                </ol>
+                </Container>
             </div>
     );
     }
@@ -46,7 +52,8 @@ function mapStateToProps( { authedUser, users } ) {
             }
 
             return 0;
-        })
+        }),
+        authedUser
     };
 }
 
