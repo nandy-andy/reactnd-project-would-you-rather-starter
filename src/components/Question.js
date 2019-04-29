@@ -55,7 +55,7 @@ class Question extends Component {
                 )}
                 <Row>
                     <Col sm='auto'>
-                        <img alt={author} src={avatarUrl} />
+                        <img alt={author} src={avatarUrl} width={160} height={160} />
                     </Col>
                     <Col sm='auto' className='question'>
                         <p>{users[author].name} asks:</p>

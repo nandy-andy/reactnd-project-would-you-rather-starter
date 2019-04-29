@@ -18,7 +18,7 @@ class LeaderboardPage extends Component {
                     {users.map( (user) => (
                         <Row as='li' key={user.id} className={authedUser === user.id ? 'current' : ''}>
                             <Col sm='auto'>
-                                <img alt={user.name} src={user.avatarURL} />
+                                <img alt={user.name} src={user.avatarURL} width={160} height={160} />
                             </Col>
                             <Col sm='auto' className='question'>
                                 <p>{user.name}</p>
