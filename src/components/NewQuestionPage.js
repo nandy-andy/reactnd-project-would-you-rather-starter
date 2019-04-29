@@ -57,7 +57,7 @@ class NewQuestionPage extends Component {
                         value={this.state.optionTwo}
                         onChange={(event) => this.onChangeOptionTwo(event)}
                     />
-                    <Button variant="primary" type="submit">Save</Button>
+                    <Button variant="primary" type="submit">Add</Button>
                 </Form>
             </div>
         );
