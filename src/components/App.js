@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -19,6 +19,7 @@ class App extends Component {
     }
 
     render() {
+        const { authedUser } = this.props;
         return (
             <Router>
                 <div className="App">
@@ -27,17 +28,13 @@ class App extends Component {
                         Would you rather? by nAndy
                     </header>
                     <main>
-                        {this.props.authedUser === null
-                            ? <Fragment>
-                                <Route path='/' exact component={LoginBox} />
-                                <Route path='/questions/:id' component={QuestionPage} />
-                              </Fragment>
-                            : <Fragment>
-                                <Route path='/' exact component={HomePage} />
-                                <Route path='/questions/:id' component={QuestionPage} />
-                                <Route path='/leaderboard' component={LeaderboardPage} />
-                                <Route path='/add' component={NewQuestionPage} />
-                              </Fragment>}
+                        {authedUser === null
+                            ? <Route path='/' exact component={LoginBox} />
+                            : <Route path='/' exact component={HomePage} />
+                        }
+                        <Route path='/questions/:id' component={QuestionPage} />
+                        <Route path='/leaderboard' component={LeaderboardPage} />
+                        <Route path='/add' component={NewQuestionPage} />
                     </main>
                 </div>
             </Router>

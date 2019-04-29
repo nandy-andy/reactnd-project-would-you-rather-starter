@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -40,6 +41,10 @@ class NewQuestionPage extends Component {
     };
 
     render() {
+        if (this.props.authedUser === null) {
+            return <Alert variant='info'>In order to see this page please login.</Alert>;
+        }
+
         return (
             <div>
                 <Navigation />

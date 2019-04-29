@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,6 +11,10 @@ import Navigation from './Navigation';
 class LeaderboardPage extends Component {
     render() {
         const { users, authedUser } = this.props;
+
+        if (authedUser === null) {
+            return <Alert variant='info'>In order to see this page please login.</Alert>;
+        }
 
         return (
             <div>

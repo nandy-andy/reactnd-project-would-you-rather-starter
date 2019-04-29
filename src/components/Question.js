@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 
@@ -49,17 +49,18 @@ class Question extends Component {
             && !optionTwo.votes.includes(authedUser);
 
         return (
-            <Container>
+            <Fragment>
                 {authedUser === null && (
-                    <Alert variant='info'>In order to answer the question please login.</Alert>
+                    <Alert variant='info'>In order to answer this question please login.</Alert>
                 )}
-                <Row>
-                    <Col sm='auto'>
-                        <img alt={author} src={avatarUrl} width={160} height={160} />
-                    </Col>
-                    <Col sm='auto' className='question'>
-                        <p>{users[author].name} asks:</p>
-                        <p>Would you rather...</p>
+                <Container>
+                    <Row>
+                        <Col sm='auto'>
+                            <img alt={author} src={avatarUrl} width={160} height={160} />
+                        </Col>
+                        <Col sm='auto' className='question'>
+                            <p>{users[author].name} asks:</p>
+                            <p>Would you rather...</p>
                             {isHomepage && (
                                 <div className='options'>
                                     <ul>
@@ -73,25 +74,26 @@ class Question extends Component {
                                     <NavLink to={`/questions/${id}`} className='btn btn-secondary'>Open the poll</NavLink>
                                 </div>
                             )}
-                        {!isHomepage && !canVote && (
-                            <ul>
-                                <li className={this.getVoteClass(optionOne.votes, authedUser)}>
-                                    {optionOne.text}? {(optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionOne.votes.length || 0})
-                                </li>
-                                <li className={this.getVoteClass(optionTwo.votes, authedUser)}>
-                                    {optionTwo.text}? {(optionTwo.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionTwo.votes.length || 0})
-                                </li>
-                            </ul>
-                        )}
-                        {!isHomepage && canVote && (
-                            <ul>
-                                <li><input type='radio' id={this.getOptionId(id, 1)} name={id} onClick={(event) => this.onVote(event, id, 'optionOne')} /><label htmlFor={this.getOptionId(id, 1)}>{optionOne.text}</label></li>
-                                <li><input type='radio' id={this.getOptionId(id, 2)} name={id} onClick={(event) => this.onVote(event, id, 'optionTwo')} /><label htmlFor={this.getOptionId(id, 2)}>{optionTwo.text}</label></li>
-                            </ul>
-                        )}
-                    </Col>
-                </Row>
-            </Container>
+                            {!isHomepage && !canVote && (
+                                <ul>
+                                    <li className={this.getVoteClass(optionOne.votes, authedUser)}>
+                                        {optionOne.text}? {(optionOne.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionOne.votes.length || 0})
+                                    </li>
+                                    <li className={this.getVoteClass(optionTwo.votes, authedUser)}>
+                                        {optionTwo.text}? {(optionTwo.votes.length/(optionOne.votes.length + optionTwo.votes.length))*100}% ({optionTwo.votes.length || 0})
+                                    </li>
+                                </ul>
+                            )}
+                            {!isHomepage && canVote && (
+                                <ul>
+                                    <li><input type='radio' id={this.getOptionId(id, 1)} name={id} onClick={(event) => this.onVote(event, id, 'optionOne')} /><label htmlFor={this.getOptionId(id, 1)}>{optionOne.text}</label></li>
+                                    <li><input type='radio' id={this.getOptionId(id, 2)} name={id} onClick={(event) => this.onVote(event, id, 'optionTwo')} /><label htmlFor={this.getOptionId(id, 2)}>{optionTwo.text}</label></li>
+                                </ul>
+                            )}
+                        </Col>
+                    </Row>
+                </Container>
+            </Fragment>
         );
     }
 }
