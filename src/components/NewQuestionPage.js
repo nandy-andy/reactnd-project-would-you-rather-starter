@@ -12,7 +12,8 @@ import { handleSaveQuestion } from '../actions/shared';
 class NewQuestionPage extends Component {
     state = {
         optionOne: '',
-        optionTwo: ''
+        optionTwo: '',
+        errorMsg: '',
     };
 
     onChangeOptionOne = (event) => {
@@ -32,6 +33,13 @@ class NewQuestionPage extends Component {
     onSubmit = (event) => {
         event.preventDefault();
 
+        if (this.state.optionOne === '' || this.state.optionTwo === '') {
+            this.setState({
+                errorMsg: 'You cannot save empty options'
+            });
+            return;
+        }
+
         this.props.dispatch(handleSaveQuestion({
             author: this.props.authedUser,
             optionOneText: this.state.optionOne,
@@ -41,14 +49,11 @@ class NewQuestionPage extends Component {
     };
 
     render() {
-        if (this.props.authedUser === null) {
-            return <Alert variant='info'>In order to see this page please login.</Alert>;
-        }
-
         return (
             <div>
                 <Navigation />
                 <p>Would you rather...</p>
+                {this.state.errorMsg && (<Alert variant='danger'>{this.state.errorMsg}</Alert>)}
                 <Form onSubmit={(event) => this.onSubmit(event)}>
                     <Form.Control
                         type="text"
