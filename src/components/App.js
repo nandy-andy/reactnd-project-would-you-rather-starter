@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import { handleInitialData } from '../actions/shared';
 
@@ -19,7 +19,8 @@ class App extends Component {
     }
 
     render() {
-        const { authedUser } = this.props;
+        const isAuthedUser = this.props.authedUser !== null;
+
         return (
             <Router>
                 <div className="App">
@@ -28,18 +29,36 @@ class App extends Component {
                         Would you rather? by nAndy
                     </header>
                     <main>
-                        {authedUser === null
-                            ? <Route path='/' exact component={LoginBox} />
-                            : <Route path='/' exact component={HomePage} />
-                        }
-                        <Route path='/questions/:id' component={QuestionPage} />
-                        <Route path='/leaderboard' component={LeaderboardPage} />
-                        <Route path='/add' component={NewQuestionPage} />
+                        <Route path='/login' exact component={LoginBox} />
+                        <PrivateRoute authed={isAuthedUser} path='/' exact component={HomePage} />
+                        <PrivateRoute authed={isAuthedUser} path='/questions/:id' component={QuestionPage} />
+                        <PrivateRoute authed={isAuthedUser} path='/leaderboard' component={LeaderboardPage} />
+                        <PrivateRoute authed={isAuthedUser} path='/add' component={NewQuestionPage} />
                     </main>
                 </div>
             </Router>
         );
     }
+}
+
+function PrivateRoute({ component: Component, authed: isAuthedUser, ...rest }) {
+    return (
+        <Route
+            {...rest}
+            render={props =>
+                isAuthedUser ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/login",
+                            state: { from: props.location }
+                        }}
+                    />
+                )
+            }
+        />
+    );
 }
 
 function mapStateToProps( { authedUser } ) {

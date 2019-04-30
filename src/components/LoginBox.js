@@ -1,32 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialAfterLoggedInData } from '../actions/shared';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class LoginBox extends Component {
     state = {
-        user: null
+        user: null,
+        redirectToReferrer: false
     };
 
     logIn = (event) => {
         event.preventDefault();
 
         if (this.state.user !== null) {
+            this.setState({
+                user: this.state.user,
+                redirectToReferrer: true
+            });
             this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
-            this.props.history.push('/');
         }
     };
 
     handleChange = (user) => {
-        this.setState(() => ({
-            user: user
-        }));
+        this.setState((state) => {
+            return {
+                user: user,
+                redirectToReferrer: state.redirectToReferrer
+            };
+        });
     };
 
     render() {
+        let { from } = this.props.location.state || { from: { pathname: "/" } };
+        let { redirectToReferrer } = this.state;
+        const { authedUser } = this.props;
+
+        if (redirectToReferrer) {
+            return <Redirect to={from} />;
+        }
+
+        if (authedUser) {
+            return <Redirect to={from} />;
+        }
+
         return (
             <Form>
                 <Form.Group controlId="exampleForm.ControlSelect1">
@@ -43,8 +62,9 @@ class LoginBox extends Component {
     }
 }
 
-function mapStateToProps( { users } ) {
+function mapStateToProps( { authedUser, users } ) {
     return {
+        authedUser,
         users: Object.values(users)
     };
 }

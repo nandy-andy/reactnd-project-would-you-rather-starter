@@ -4,21 +4,12 @@ import { connect } from 'react-redux';
 import Navigation from './Navigation';
 import Question from './Question';
 import { withRouter } from "react-router-dom";
-import { handleInitialAfterLoggedInData } from "../actions/shared";
 
 class QuestionPage extends Component {
-    componentDidMount() {
-        if (this.props.authedUser === null) {
-            this.props.dispatch(handleInitialAfterLoggedInData(null));
-        }
-    }
-
     render() {
-        const { authedUser } = this.props;
-
         return (
             <div>
-                { authedUser !== null && <Navigation /> }
+                <Navigation />
                 <Question />
             </div>
         );

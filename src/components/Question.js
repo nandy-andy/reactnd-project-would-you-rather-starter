@@ -50,9 +50,6 @@ class Question extends Component {
 
         return (
             <Fragment>
-                {authedUser === null && (
-                    <Alert variant='info'>In order to answer this question please login.</Alert>
-                )}
                 <Container>
                     <Row>
                         <Col sm='auto'>
