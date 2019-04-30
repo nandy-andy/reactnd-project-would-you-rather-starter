@@ -8,39 +8,25 @@ import Form from 'react-bootstrap/Form';
 
 class LoginBox extends Component {
     state = {
-        user: null,
-        redirectToReferrer: false
+        user: null
     };
 
     logIn = (event) => {
         event.preventDefault();
 
         if (this.state.user !== null) {
-            this.setState({
-                user: this.state.user,
-                redirectToReferrer: true
-            });
+            this.setState({user: this.state.user});
             this.props.dispatch(handleInitialAfterLoggedInData(this.state.user));
         }
     };
 
     handleChange = (user) => {
-        this.setState((state) => {
-            return {
-                user: user,
-                redirectToReferrer: state.redirectToReferrer
-            };
-        });
+        this.setState({user: user});
     };
 
     render() {
         let { from } = this.props.location.state || { from: { pathname: "/" } };
-        let { redirectToReferrer } = this.state;
         const { authedUser } = this.props;
-
-        if (redirectToReferrer) {
-            return <Redirect to={from} />;
-        }
 
         if (authedUser) {
             return <Redirect to={from} />;

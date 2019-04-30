@@ -8,6 +8,7 @@ import { setAuthedUser } from '../actions/authedUser';
 
 class Navigation extends Component {
     logOut = (event) => {
+        event.preventDefault();
         console.log('See you!');
         this.props.dispatch(setAuthedUser(null));
     };

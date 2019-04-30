@@ -16,11 +16,10 @@ class QuestionPage extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, questions }, { id, match }) {
+function mapStateToProps({ questions }, { id, match }) {
     const question = questions[id] || questions[match.params.id] || null;
 
     return {
-        authedUser,
         question
     };
 }
